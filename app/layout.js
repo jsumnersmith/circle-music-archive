@@ -1,5 +1,6 @@
 import { Inter } from 'next/font/google'
 import './globals.css'
+import Link from 'next/link'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -13,7 +14,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={inter.className}>
         <header className="flex w-3/4 mx-auto py-10">
-          <h1 className="text-4xl font-bold">Circle of Hope Music Archive</h1>
+          <Link href="/"><h1 className="text-4xl font-bold">Circle of Hope Music Archive</h1></Link>
         </header>
         <main className="min-h-screen w-3/4 mx-auto">
           {children}
