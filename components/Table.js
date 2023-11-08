@@ -14,11 +14,11 @@ const getSongLyricsUrl = (song) => {
 }
 
 const NextButton = ({num, max}) => (
-  <Link href={num >= (max + 1) ? `` : `/songs/${num + 1}`} className="bg-gray-200 hover:bg-gray-300 px-2 py-1 text-sm rounded-sm text-gray-800 disabled:cursor-not-allowed disabled:bg-gray-300" disabled={num >= (max + 1)}>Next</Link>
+  <Link href={num >= (max + 1) ? `` : `/songs/${num + 1}`} className={`border border-gray-300 hover:bg-gray-300 hover:bg-opacity-50 px-5 py-1 text-md rounded-sm text-gray-800 ${ num >= (max + 1) ? "cursor-not-allowed text-gray-800 bg-gray-400 hover:bg-gray-400": ""}`} disabled={num >= (max + 1)}>Next</Link>
 )
 
 const PreviousButton = ({num, max}) => (
-  <Link href={num <= 1 ? `` : `/songs/${num - 1}`} className="bg-gray-200 hover:bg-gray-300 px-2 py-1 text-sm rounded-sm text-gray-800 disabled:cursor-not-allowed disabled:bg-gray-300" disabled={num <= 1}>Previous</Link>
+  <Link href={num <= 1 ? `` : `/songs/${num - 1}`} className={`border border-gray-300 hover:bg-gray-300 hover:bg-opacity-50 px-5 py-1 text-md rounded-sm text-gray-800 ${ num <= 1 ? "cursor-not-allowed bg-gray-400 text-gray-800 hover:bg-gray-400" : ""}`} disabled={num <= 1}>Previous</Link>
 )
 
 export default function Table ({songs, count, num}) {
@@ -31,7 +31,7 @@ export default function Table ({songs, count, num}) {
         <NextButton num={num} max={max} />
       </div>
       <table className="w-full">
-        <thead className="border-b-white border-b p-2">
+        <thead className="border-b-gray-500 border-b p-2">
           <tr>
             <th className="text-left p-3">Name</th>
             <th className="text-left p-3">Author</th>
@@ -39,18 +39,18 @@ export default function Table ({songs, count, num}) {
             <th className="text-right p-3">Lyrics</th>
           </tr>
         </thead>
-        <tbody>
-          {songs.map(song =>
-            <tr className="border-b-white border-b border-opacity-30" key={song.id}>
-              <td className="px-3 py-2">{song.name}</td>
-              <td className="px-3 py-2"> </td>
-              <td className="px-3 py-2">{ getSongLinkURL(song) ? <a href={getSongLinkURL(song)} className="text-yellow-500 hover:underline" target="blank">{getSongLinkText(song)}</a> : ""}  </td>
-              <td className="px-3 py-2 text-right">{ getSongLyricsUrl(song) ? <a href={getSongLyricsUrl(song)} className="text-yellow-500 hover:underline" target="blank">Lyrics</a> : ""}  </td>
+        <tbody className="p-2">
+          {songs?.map(song =>
+            <tr className="border-b-gray-300 border-b border-opacity-60" key={song.id}>
+              <td className="px-3 py-3 font-bold">{song.name}</td>
+              <td className="px-3 py-3">{song.Artist}</td>
+              <td className="px-3 py-3">{ getSongLinkURL(song) ? <a href={getSongLinkURL(song)} className="text-blue-600 hover:underline" target="blank">{getSongLinkText(song)}</a> : ""}  </td>
+              <td className="px-3 py-3 text-right">{ getSongLyricsUrl(song) ? <a href={getSongLyricsUrl(song)} className="text-blue-600 hover:underline" target="blank">Lyrics</a> : ""}  </td>
             </tr>  
           )}
         </tbody>
       </table>
-      <div className="flex justify-between items-center w-full mt-6">
+      <div className="flex justify-between items-center w-full my-6">
         <PreviousButton num={num} max={max} />
         <p>{((num - 1) * 25) + 1} - {num * 25 < count ? num * 25 : count} of {count}</p>
         <NextButton num={num} max={max} />

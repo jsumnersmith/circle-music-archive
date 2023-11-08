@@ -1,6 +1,7 @@
 import getSongs from "../lib/songs";
 import getCount from "../lib/count";
 import Table from "../components/Table";
+import Search from "../components/Search";
 
 
 export default async function Home() {
@@ -10,6 +11,7 @@ export default async function Home() {
 
   return (
     <main className="flex min-h-screen flex-col items-center w-full">
+      <Search initialSearch='' />
       <Table songs={songs} count={count} num={num}/>
     </main>
   )
