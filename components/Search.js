@@ -3,16 +3,17 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { Search as SearchIcon } from "react-feather"; 
-import { redirect } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 
 export default function Search({initialSearch = ''}) {
+  const router = useRouter();
   const [search, setSearch] = useState(initialSearch);
   const handleChange = (e) => {
     setSearch(e.target.value);
   }
   const handleEnter = (e) => {
     if (e.key === "Enter") {
-      redirect(`/search?q=${search}`);
+      router.push(`/search?q=${search}`);
     }
   }
   return (
