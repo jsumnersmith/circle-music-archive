@@ -2,7 +2,8 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { Redirect } from "next";
+import { Search as SearchIcon } from "react-feather"; 
+import { redirect } from 'next/navigation'
 
 export default function Search({initialSearch = ''}) {
   const [search, setSearch] = useState(initialSearch);
@@ -10,8 +11,8 @@ export default function Search({initialSearch = ''}) {
     setSearch(e.target.value);
   }
   const handleEnter = (e) => {
-    if (e.keyCode === 13) {
-      Redirect(`/search?q=${search}`);
+    if (e.key === "Enter") {
+      redirect(`/search?q=${search}`);
     }
   }
   return (
@@ -22,9 +23,9 @@ export default function Search({initialSearch = ''}) {
         value={search}
         onChange={handleChange}
         onKeyPress={handleEnter}
-        className="px-3 py-2 border border-gray-300 bg-gray-100 flex-grow rounded-sm" 
+        className="button-shadow px-3 py-2 flex-grow rounded-md" 
       /> 
-      <Link href={`/search?q=${search}`} className="bg-gray-800 hover:bg-gray-900 px-4 py-2 text-md rounded-sm text-gray-100">Search</Link>
+      <Link href={`/search?q=${search}`} className="button-shadow bg-white hover:bg-opacity-90 focus:border-blue-600 focus:ring-0 px-4 py-2 text-md rounded-md flex gap-2 items-center"><SearchIcon height={20}/>Search</Link>
     </div>
     
   )

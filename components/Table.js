@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Fragment } from "react";
+import { ChevronLeft, ChevronRight } from "react-feather";
 
 const getSongLinkURL = (song) => {
   return song.YouTubeUrl || song.MP3Url || false;
@@ -14,11 +15,11 @@ const getSongLyricsUrl = (song) => {
 }
 
 const NextButton = ({num, max}) => (
-  <Link href={num >= (max + 1) ? `` : `/songs/${num + 1}`} className={`border border-gray-300 hover:bg-gray-300 hover:bg-opacity-50 px-5 py-1 text-md rounded-sm text-gray-800 ${ num >= (max + 1) ? "cursor-not-allowed text-gray-800 bg-gray-400 hover:bg-gray-400": ""}`} disabled={num >= (max + 1)}>Next</Link>
+  <Link href={num >= (max + 1) ? `` : `/songs/${num + 1}`} className={`button-shadow bg-white hover:bg-opacity-70 px-5 py-2 text-md rounded-md flex gap-2 items-center ${ num >= (max + 1) ? "cursor-not-allowed": ""}`} disabled={num >= (max + 1)}>Next <ChevronRight height={20}/></Link>
 )
 
 const PreviousButton = ({num, max}) => (
-  <Link href={num <= 1 ? `` : `/songs/${num - 1}`} className={`border border-gray-300 hover:bg-gray-300 hover:bg-opacity-50 px-5 py-1 text-md rounded-sm text-gray-800 ${ num <= 1 ? "cursor-not-allowed bg-gray-400 text-gray-800 hover:bg-gray-400" : ""}`} disabled={num <= 1}>Previous</Link>
+  <Link href={num <= 1 ? `` : `/songs/${num - 1}`} className={`button-shadow bg-white hover:bg-opacity-70 px-5 py-2 text-md rounded-md flex gap-2 items-center ${ num <= 1 ? "cursor-not-allowed" : ""}`} disabled={num <= 1}><ChevronLeft height={20}/> Previous</Link>
 )
 
 export default function Table ({songs, count, num}) {
@@ -26,26 +27,26 @@ export default function Table ({songs, count, num}) {
 
   return (
     <Fragment>
-      <div className="flex items-center justify-between gap-3 w-full mb-6">
+      {/* <div className="flex items-center justify-between gap-3 w-full mb-6">
         <PreviousButton num={num} max={max} />
         <NextButton num={num} max={max} />
-      </div>
-      <table className="w-full">
-        <thead className="border-b-gray-500 border-b p-2">
+      </div> */}
+      <table className="w-full bg-white rounded-md">
+        <thead className="border-b-cool-gray-200 border-b p-2">
           <tr>
-            <th className="text-left p-3">Name</th>
+            <th className="text-left p-3 pl-6">Name</th>
             <th className="text-left p-3">Author</th>
             <th className="text-left p-3">Recording</th>
-            <th className="text-right p-3">Lyrics</th>
+            <th className="text-right p-3 pr-8">Lyrics</th>
           </tr>
         </thead>
         <tbody className="p-2">
           {songs?.map(song =>
             <tr className="border-b-gray-300 border-b border-opacity-60" key={song.id}>
-              <td className="px-3 py-3 font-bold">{song.name}</td>
-              <td className="px-3 py-3">{song.Artist}</td>
-              <td className="px-3 py-3">{ getSongLinkURL(song) ? <a href={getSongLinkURL(song)} className="text-blue-600 hover:underline" target="blank">{getSongLinkText(song)}</a> : ""}  </td>
-              <td className="px-3 py-3 text-right">{ getSongLyricsUrl(song) ? <a href={getSongLyricsUrl(song)} className="text-blue-600 hover:underline" target="blank">Lyrics</a> : ""}  </td>
+              <td className="p-3 pl-6 font-semibold">{song.name}</td>
+              <td className="p-3">{song.Artist}</td>
+              <td className="p-3">{ getSongLinkURL(song) ? <a href={getSongLinkURL(song)} className="text-blue-600 hover:underline" target="blank">{getSongLinkText(song)}</a> : ""}  </td>
+              <td className="p-3 pr-8 text-right">{ getSongLyricsUrl(song) ? <a href={getSongLyricsUrl(song)} className="text-blue-600 hover:underline" target="blank">Lyrics</a> : ""}  </td>
             </tr>  
           )}
         </tbody>
