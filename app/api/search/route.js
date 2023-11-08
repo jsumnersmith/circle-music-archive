@@ -14,12 +14,15 @@ export async function GET(request) {
  
         const songs = await db
             .collection("songs")
-            .find({ $text: { $search: {
-              index: 'text_search',
-              query: q
-            }}})
-            .limit(25)
-            .skip(skip)
+            .aggregate([{ $search: {
+              "index": 'text_search',
+              "phrase": {
+                "query": search,
+                "path": ["name", "Artist"]
+              }
+            }}, {
+              $limit: 25
+            }])
             .toArray();
          return Response.json({ songs })
     } catch (e) {
