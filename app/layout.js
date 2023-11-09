@@ -14,10 +14,10 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`${inter.className} bg-warm-gray-50`}>
-        <header className="flex w-3/4 mx-auto pt-10 pb-4">
-          <Link href="/" className="flex gap-3"><Image src="/coh.png" width={75} height={51}/><h1 className="text-5xl tracking-tight font-bold">Music Table Archive</h1></Link>
+        <header className="flex w-[96%] max-w-7xl mx-auto pt-10 pb-4">
+          <Link href="/" className="flex items-center gap-3"><Image src="/coh.png" width={75} height={51}/><h1 className="text-2xl md:text-5xl tracking-tight font-bold">Music Table Archive</h1></Link>
         </header>
-        <main className="min-h-screen w-3/4 mx-auto">
+        <main className="min-h-screen w-[96%] max-w-7xl mx-auto">
           {children}
         </main>
       </body>
