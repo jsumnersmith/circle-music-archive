@@ -11,9 +11,15 @@ export default function Search({initialSearch = ''}) {
   const handleChange = (e) => {
     setSearch(e.target.value);
   }
+
+  const getSearchUrl = () => {
+    if (search === '') { return '/'} 
+    return `/search?q=${search}`;
+  }
+
   const handleEnter = (e) => {
     if (e.key === "Enter") {
-      router.push(`/search?q=${search}`);
+      router.push(getSearchUrl());
     }
   }
   return (
@@ -26,7 +32,7 @@ export default function Search({initialSearch = ''}) {
         onKeyPress={handleEnter}
         className="border-cool-gray-200 border px-3 py-2 flex-grow rounded-md" 
       /> 
-      <Link href={`/search?q=${search}`} className="button-shadow bg-white hover:bg-opacity-90 focus:border-blue-600 focus:ring-0 px-4 py-2 text-md rounded-md flex gap-2 items-center"><SearchIcon height={20}/>Search</Link>
+      <Link href={getSearchUrl()} className="button-shadow bg-white hover:bg-opacity-90 focus:border-blue-600 focus:ring-0 px-4 py-2 text-md rounded-md flex gap-2 items-center"><SearchIcon height={20}/>Search</Link>
     </div>
     
   )
